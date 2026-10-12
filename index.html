@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#4A2E8A">
+<title>استعلام قیمت فرش مروستی</title>
+<link rel="manifest" href="data:application/json,%7B%22name%22%3A%22%D9%81%D8%B1%D8%B4%20%D9%85%D8%B1%D9%88%D8%B3%D8%AA%DB%8C%22%2C%22short_name%22%3A%22%D9%85%D8%B1%D9%88%D8%B3%D8%AA%DB%8C%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%234A2E8A%22%2C%22theme_color%22%3A%22%234A2E8A%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fpng%3Bbase64%2CYOUR_LOGO_BASE64_HERE%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
+<style>
+:root{
+  --brand:#4A2E8A;
+  --brand-dark:#3A1F6E;
+  --gold:#D4AF37;
+  --gold-light:#F0D77B;
+  --paper:#FFFFFF;
+  --bg:#F5F3FA;
+  --ink:#1F1A2E;
+  --muted:#7A7590;
+  --success:#2E7D5B;
+  --shadow:0 8px 30px rgba(74,46,138,0.15);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0;min-height:100vh;
+  background:linear-gradient(160deg,#4A2E8A 0%,#3A1F6E 100%);
+  font-family:'Vazirmatn',Tahoma,Arial,sans-serif;
+  color:var(--ink);
+  padding:16px;
+  display:flex;justify-content:center;align-items:flex-start;
+}
+.container{
+  width:100%;max-width:480px;
+  background:var(--paper);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  margin:16px 0;
+}
+.header{
+  background:linear-gradient(135deg,var(--brand),var(--brand-dark));
+  padding:24px 20px 20px;
+  text-align:center;
+  color:#fff;
+  position:relative;
+}
+.header::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));
+}
+.logo{
+  width:120px;height:120px;
+  border-radius:50%;
+  background:#fff;
+  padding:8px;
+  margin:0 auto 12px;
+  display:block;
+  box-shadow:0 4px 16px rgba(0,0,0,0.2);
+  object-fit:contain;
+}
+.header h1{font-size:20px;margin:0;font-weight:700;letter-spacing:-0.3px}
+.header p{font-size:12px;margin:6px 0 0;opacity:0.85}
+.body{padding:24px 20px}
+.field{margin-bottom:18px}
+label{
+  display:block;font-size:13px;font-weight:600;
+  margin-bottom:8px;color:var(--brand);
+}
+label .num{
+  display:inline-block;width:22px;height:22px;
+  background:var(--brand);color:#fff;
+  border-radius:50%;text-align:center;line-height:22px;
+  font-size:12px;margin-left:6px;
+}
+select{
+  width:100%;padding:14px 16px;
+  border:2px solid #E8E4F0;
+  border-radius:14px;
+  background:#FAF9FD;
+  color:var(--ink);
+  font:inherit;font-size:15px;
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%234A2E8A' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:left 16px center;
+  padding-left:44px;
+  transition:border-color 0.2s,background 0.2s;
+}
+select:focus{outline:none;border-color:var(--brand);background:#fff}
+select:disabled{background:#F2F0F7;color:#A8A3B8;cursor:not-allowed}
+.result{
+  margin-top:24px;padding:24px 20px;
+  background:linear-gradient(135deg,#F8F5FF,#EFE9FF);
+  border-radius:18px;
+  border:2px dashed var(--gold);
+  text-align:center;
+}
+.result .caption{font-size:13px;color:var(--muted);margin-bottom:8px}
+.amount{
+  font-size:32px;font-weight:800;
+  color:var(--brand);
+  margin:8px 0;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-0.5px;
+  min-height:44px;
+  transition:color 0.3s;
+}
+.amount.show{color:var(--success);animation:pop 0.4s ease}
+@keyframes pop{0%{transform:scale(0.9);opacity:0.5}100%{transform:scale(1);opacity:1}}
+.amount .unit{font-size:16px;font-weight:600;color:var(--muted);margin-right:4px}
+.copy-btn{
+  margin-top:16px;
+  width:100%;padding:14px;
+  background:var(--brand);color:#fff;
+  border:none;border-radius:14px;
+  font:inherit;font-size:15px;font-weight:700;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform 0.15s,background 0.2s;
+}
+.copy-btn:active{transform:scale(0.97)}
+.copy-btn:hover{background:var(--brand-dark)}
+.copy-btn:disabled{background:#C5BEE0;cursor:not-allowed}
+.copy-btn.copied{background:var(--success)}
+.footer{
+  text-align:center;padding:16px 20px 24px;
+  font-size:11px;color:var(--muted);
+  border-top:1px solid #EFEAF8;
+}
+.footer strong{color:var(--brand)}
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--success);color:#fff;
+  padding:12px 24px;border-radius:30px;
+  font-size:14px;font-weight:600;
+  box-shadow:0 8px 24px rgba(0,0,0,0.2);
+  transition:transform 0.3s ease;
+  z-index:100;pointer-events:none;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:380px){
+  .amount{font-size:26px}
+  .logo{width:100px;height:100px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <img src="data:image/png;base64,YOUR_LOGO_BASE64_HERE" alt="لوگو مروستی" class="logo" onerror="this.style.display='none'">
+    <h1>استعلام قیمت محصولات</h1>
+    <p>فرش مروستی · راهنمای قیمت همکاران</p>
+  </div>
+  <div class="body">
+    <div class="field">
+      <label><span class="num">۱</span>برند</label>
+      <select id="brand"><option value="">انتخاب برند</option></select>
+    </div>
+    <div class="field">
+      <label><span class="num">۲</span>کلکسیون</label>
+      <select id="collection" disabled><option value="">ابتدا برند را انتخاب کنید</option></select>
+    </div>
+    <div class="field">
+      <label><span class="num">۳</span>سایز</label>
+      <select id="size" disabled><option value="">ابتدا کلکسیون را انتخاب کنید</option></select>
+    </div>
+    <div class="result">
+      <div class="caption">قیمت نهایی</div>
+      <div class="amount" id="price">—</div>
+      <button class="copy-btn" id="copyBtn" disabled>
+        <span>📋</span> کپی قیمت برای ارسال
+      </button>
+    </div>
+  </div>
+  <div class="footer">
+    <strong>فرش مروستی</strong> · قیمت‌ها به تومان می‌باشد
+  </div>
+</div>
+<div class="toast" id="toast">✓ قیمت کپی شد</div>
+
+<script>
+// ===== داده‌های قیمت (از فایل اکسل) =====
+const priceData = {
+  "ستاره کویر": {
+    "ستارگان": {"3*4":984000000,"2/5*3/5":774900000,"2*3":492000000,"1/5*2/20":270600000,"1*4":328000000,"1*3":246000000,"1*2":164000000,"1*1/5":123000000,"قطر1":82000000,"قطر1/5":184500000,"قطر 2":328000000,"50*80":32800000},
+    "عالی قاپو": {"3*4":834000000,"2/5*3/5":656775000,"2*3":417000000,"1/5*2/20":229350000,"1*4":278000000,"1*3":208500000,"1*2":139000000,"1*1/5":104250000,"قطر1":69500000,"قطر1/5":156375000,"قطر 2":278000000,"50*80":27800000},
+    "نقش جهان": {"3*4":828000000,"2/5*3/5":652050000,"2*3":414000000,"1/5*2/20":227700000,"1*4":276000000,"1*3":207000000,"1*2":138000000,"1*1/5":103500000,"قطر1":69000000,"قطر1/5":155250000,"قطر 2":276000000,"50*80":27600000},
+    "شهریار": {"3*4":756000000,"2/5*3/5":595350000,"2*3":378000000,"1/5*2/20":207900000,"1*4":252000000,"1*3":189000000,"1*2":126000000,"1*1/5":94500000,"قطر1":63000000,"قطر1/5":141750000,"قطر 2":252000000,"50*80":25200000},
+    "شاهکار نوین": {"3*4":732000000,"2/5*3/5":576450000,"2*3":366000000,"1/5*2/20":201300000,"1*4":244000000,"1*3":183000000,"1*2":122000000,"1*1/5":91500000,"قطر1":61000000,"قطر1/5":137250000,"قطر 2":244000000,"50*80":24400000},
+    "زهره نوین": {"3*4":690000000,"2/5*3/5":543375000,"2*3":345000000,"1/5*2/20":189750000,"1*4":230000000,"1*3":172500000,"1*2":115000000,"1*1/5":86250000,"قطر1":57500000,"قطر1/5":129375000,"قطر 2":230000000,"50*80":23000000},
+    "شاه عباسی": {"3*4":654000000,"2/5*3/5":515025000,"2*3":327000000,"1/5*2/20":179850000,"1*4":218000000,"1*3":163500000,"1*2":109000000,"1*1/5":81750000,"قطر1":54500000,"قطر1/5":122625000,"قطر 2":218000000,"50*80":21800000},
+    "سلطان آباد": {"3*4":438000000,"2/5*3/5":344925000,"2*3":219000000,"1/5*2/20":120450000,"1*4":146000000,"1*3":109500000,"1*2":73000000,"1*1/5":54750000,"قطر1":36500000,"قطر1/5":82125000,"قطر 2":146000000,"50*80":14600000},
+    "ایساتیس": {"3*4":648000000,"2/5*3/5":510300000,"2*3":324000000,"1/5*2/20":178200000,"1*4":216000000,"1*3":162000000,"1*2":108000000,"1*1/5":81000000,"قطر1":54000000,"قطر1/5":121500000,"قطر 2":216000000,"50*80":21600000},
+    "شاهین": {"3*4":516000000,"2/5*3/5":406350000,"2*3":258000000,"1/5*2/20":141900000,"1*4":172000000,"1*3":129000000,"1*2":86000000,"1*1/5":64500000,"قطر1":43000000,"قطر1/5":96750000,"قطر 2":172000000,"50*80":17200000},
+    "شاهسون": {"3*4":384000000,"2/5*3/5":302400000,"2*3":192000000,"1/5*2/20":105600000,"1*4":128000000,"1*3":96000000,"1*2":64000000,"1*1/5":48000000,"قطر1":32000000,"قطر1/5":72000000,"قطر 2":128000000,"50*80":12800000},
+    "گلیم": {"3*4":222000000,"2/5*3/5":174825000,"2*3":111000000,"1/5*2/20":61050000,"1*4":74000000,"1*3":55500000,"1*2":37000000,"1*1/5":27750000,"قطر1":18500000,"قطر1/5":41625000,"قطر 2":74000000,"50*80":7400000}
+  },
+  "سورن مروستی": {
+    "فرش مروستی 700 شانه": {"3*4":813000000,"2/5*3/5":644750000,"2*3":406500000,"1/5*2/20":114328125,"1*4":271000000,"1*3":203250000,"1*2":135500000,"1*1/5":101625000,"قطر1":67750000,"قطر1/5":152437500,"قطر 2":271000000,"50*80":27100000},
+    "فرش مروستی 1000 شانه": {"3*4":864000000,"2/5*3/5":683000000,"2*3":432000000,"1/5*2/20":121500000,"1*4":288000000,"1*3":216000000,"1*2":144000000,"1*1/5":108000000,"قطر1":72000000,"قطر1/5":162000000,"قطر 2":288000000,"50*80":28800000},
+    "فرش مروستی 1500 شانه": {"3*4":1040000000,"2/5*3/5":815000000,"2*3":520000000,"1/5*2/20":146250000,"1*4":346666667,"1*3":260000000,"1*2":173333333,"1*1/5":130000000,"قطر1":86666667,"قطر1/5":195000000,"قطر 2":346666667,"50*80":34666667}
+  },
+  "شاهانه": {
+    "شاهانه 700 شانه": {"3*4":813000000,"2/5*3/5":644750000,"2*3":406500000,"1/5*2/20":114328125,"1*4":271000000,"1*3":203250000,"1*2":135500000,"1*1/5":101625000,"قطر1":67750000,"قطر1/5":152437500,"قطر 2":271000000,"50*80":27100000},
+    "شاهانه 1200 شانه": {"3*4":914000000,"2/5*3/5":720500000,"2*3":457000000,"1/5*2/20":128531250,"1*4":304666667,"1*3":228500000,"1*2":152333333,"1*1/5":114250000,"قطر1":76166667,"قطر1/5":171375000,"قطر 2":304666667,"50*80":30466667}
+  },
+  "آرمانی": {
+    "ينترستي 160 شانه": {"3*4":444000000,"2/5*3/5":368000000,"2*3":222000000,"1/5*2/20":62437500,"1*4":148000000,"1*3":111000000,"1*2":74000000,"1*1/5":55500000,"قطر1":37000000,"قطر1/5":83250000,"قطر 2":148000000,"50*80":14800000},
+    "ينترستي 420 شانه": {"3*4":462000000,"2/5*3/5":381500000,"2*3":231000000,"1/5*2/20":64968750,"1*4":154000000,"1*3":115500000,"1*2":77000000,"1*1/5":57750000,"قطر1":38500000,"قطر1/5":86625000,"قطر 2":154000000,"50*80":15400000}
+  },
+  "آکسون": {
+    "700 شانه BCF": {"3*4":516000000,"2/5*3/5":422000000,"2*3":258000000,"1/5*2/20":72562500,"1*4":172000000,"1*3":129000000,"1*2":86000000,"1*1/5":64500000,"قطر1":43000000,"قطر1/5":96750000,"قطر 2":172000000,"50*80":17200000}
+  },
+  "نقش پریزاد": {
+    "نقش پریزاد": {"3*4":852000000,"2/5*3/5":675000000,"2*3":426000000,"1/5*2/20":119812500,"1*4":284000000,"1*3":213000000,"1*2":142000000,"1*1/5":106500000,"قطر1":71000000,"قطر1/5":159750000,"قطر 2":284000000,"50*80":28400000}
+  },
+  "مرینوس": {
+    "مرینوس": {"3*4":984000000,"2/5*3/5":784000000,"2*3":492000000,"1/5*2/20":140000000,"1*4":328000000,"1*3":246000000,"1*2":164000000,"1*1/5":123000000,"قطر1":82000000,"قطر1/5":184500000,"قطر 2":328000000,"50*80":32800000}
+  }
+};
+
+// ===== توابع کمکی =====
+const brandEl = document.getElementById('brand');
+const collEl = document.getElementById('collection');
+const sizeEl = document.getElementById('size');
+const priceEl = document.getElementById('price');
+const copyBtn = document.getElementById('copyBtn');
+const toast = document.getElementById('toast');
+
+function formatPrice(num) {
+  if (num === undefined || num === null) return '—';
+  const rounded = Math.round(num / 1000) * 1000;
+  return new Intl.NumberFormat('fa-IR').format(rounded);
+}
+
+function fillSelect(el, placeholder, items) {
+  el.innerHTML = '';
+  const first = document.createElement('option');
+  first.value = '';
+  first.textContent = placeholder;
+  el.appendChild(first);
+  items.forEach(item => {
+    const o = document.createElement('option');
+    o.value = item;
+    o.textContent = item;
+    el.appendChild(o);
+  });
+}
+
+function resetPrice() {
+  priceEl.textContent = '—';
+  priceEl.classList.remove('show');
+  copyBtn.disabled = true;
+  copyBtn.classList.remove('copied');
+}
+
+// ===== رویدادها =====
+brandEl.addEventListener('change', () => {
+  const brand = brandEl.value;
+  if (!brand) {
+    fillSelect(collEl, 'ابتدا برند را انتخاب کنید', []);
+    fillSelect(sizeEl, 'ابتدا کلکسیون را انتخاب کنید', []);
+    collEl.disabled = true;
+    sizeEl.disabled = true;
+    resetPrice();
+    return;
+  }
+  fillSelect(collEl, 'انتخاب کلکسیون', Object.keys(priceData[brand] || {}));
+  collEl.disabled = false;
+  fillSelect(sizeEl, 'ابتدا کلکسیون را انتخاب کنید', []);
+  sizeEl.disabled = true;
+  resetPrice();
+});
+
+collEl.addEventListener('change', () => {
+  const brand = brandEl.value;
+  const coll = collEl.value;
+  if (!coll) {
+    fillSelect(sizeEl, 'ابتدا کلکسیون را انتخاب کنید', []);
+    sizeEl.disabled = true;
+    resetPrice();
+    return;
+  }
+  const sizes = (priceData[brand] || {})[coll] || {};
+  fillSelect(sizeEl, 'انتخاب سایز', Object.keys(sizes));
+  sizeEl.disabled = false;
+  resetPrice();
+});
+
+sizeEl.addEventListener('change', () => {
+  const v = priceData?.[brandEl.value]?.[collEl.value]?.[sizeEl.value];
+  if (v === undefined || v === null) {
+    resetPrice();
+    return;
+  }
+  priceEl.innerHTML = formatPrice(v) + ' <span class="unit">تومان</span>';
+  priceEl.classList.add('show');
+  copyBtn.disabled = false;
+});
+
+copyBtn.addEventListener('click', () => {
+  const brand = brandEl.value;
+  const coll = collEl.value;
+  const size = sizeEl.value;
+  const price = priceEl.textContent.replace('تومان', '').trim();
+  const text = `فرش مروستی\nبرند: ${brand}\nکلکسیون: ${coll}\nسایز: ${size}\nقیمت: ${price} تومان`;
+  navigator.clipboard.writeText(text).then(() => {
+    copyBtn.classList.add('copied');
+    copyBtn.innerHTML = '<span>✓</span> کپی شد!';
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+      copyBtn.classList.remove('copied');
+      copyBtn.innerHTML = '<span>📋</span> کپی قیمت برای ارسال';
+    }, 2000);
+  }).catch(() => {
+    alert('خطا در کپی. لطفاً دستی یادداشت کنید.');
+  });
+});
+
+// ===== مقداردهی اولیه =====
+fillSelect(brandEl, 'انتخاب برند', Object.keys(priceData));
+</script>
+</body>
+</html>
